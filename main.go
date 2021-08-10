@@ -20,5 +20,5 @@ func main() {
 	err = l.Insert(2, 45)
 	v, err := l.ValueAt(2)
 	fmt.Printf("value at 2 is %+v \n", v )
-	l.Print()
+	l.Print() 
 }
