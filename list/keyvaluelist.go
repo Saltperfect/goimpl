@@ -1,24 +1,31 @@
 package list
 
-import "fmt"
+import (
+	"fmt"
+)
 
-type linknode struct {
-	val  interface{}
-	next *linknode
+type KeyValue struct {
+	Key int
+	Value interface{}
 }
 
-type Linklist struct {
-	Head *linknode
-	curr *linknode
+type keyValueNode struct {
+	val  KeyValue
+	next *keyValueNode
+}
+
+type KeyValueLinklist struct {
+	Head *keyValueNode
+	curr *keyValueNode
 	size int
 }
 
-func Newlist() *Linklist {
-	return &Linklist{}
+func NewKeyValuelist() *KeyValueLinklist {
+	return &KeyValueLinklist{}
 }
 
-func (l *Linklist) Put(i interface{}) error {
-	node := linknode{val: i}
+func (l *KeyValueLinklist) PutKeyValue(key int, i interface{}) error {
+	node := keyValueNode{val: KeyValue{Key: key, Value: i}}
 	if l.Head == nil {
 		l.Head = &node
 	}
@@ -30,7 +37,7 @@ func (l *Linklist) Put(i interface{}) error {
 	return nil
 }
 
-func (l *Linklist) Print() error {
+func (l *KeyValueLinklist) PrintKeyValueList() error {
 	if l.Head == nil {
 		return fmt.Errorf("empty list")
 	}
@@ -42,15 +49,15 @@ func (l *Linklist) Print() error {
 	return nil
 }
 
-func (l *Linklist) Size() (int, error) {
+func (l *KeyValueLinklist) KeyValueSize() (int, error) {
 	return l.size, nil
 }
 
-func (l *Linklist) Empty() (bool, error) {
+func (l *KeyValueLinklist) KeyValueEmpty() (bool, error) {
 	return l.size == 0, nil
 }
 
-func (l *Linklist) ValueAt(index int) (interface{}, error) {
+func (l *KeyValueLinklist) ListValueAt(index int) (interface{}, error) {
 	if index >= l.size {
 		return nil, fmt.Errorf("index out of bound")
 	}
@@ -60,7 +67,7 @@ func (l *Linklist) ValueAt(index int) (interface{}, error) {
 	}
 	return tmp.val, nil
 }
-func (l *Linklist) Insert(index int, val interface{}) error {
+func (l *KeyValueLinklist) KeyValueListInsert(index int, key int, val interface{}) error {
 	if index >= l.size {
 		return fmt.Errorf("index out of bound")
 	}
@@ -68,17 +75,17 @@ func (l *Linklist) Insert(index int, val interface{}) error {
 	for i := 1; i < index; i++ {
 		tmp = tmp.next
 	}
-	node := linknode{val: val, next: tmp.next}
+	node := keyValueNode{val: KeyValue{Key: key, Value: val}, next: tmp.next}
 	tmp.next = &node
 	l.size++
 	return nil
 }
 
-func (l *Linklist) Reverse() error {
+func (l *KeyValueLinklist) KeyValueListReverse() error {
 	if l.size < 2 {
 		return nil
 	}
-	var s, f *linknode
+	var s, f *keyValueNode
 	for s, f = l.Head, l.Head.next; f != nil; {
 		tmp := f.next
 		f.next = s
@@ -90,10 +97,10 @@ func (l *Linklist) Reverse() error {
 	return nil
 }
 
-func (l *Linklist) Exists(i interface{}) (bool, error ){
+func (l *KeyValueLinklist) KeyExists(key int) (bool, error ){
 	tmp := l.Head
 	for i:= 0; i < l.size; i++ {
-		if tmp.val == i{
+		if tmp.val.Key == key { 
 			return true, nil
 		}
 		tmp = tmp.next
