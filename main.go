@@ -6,6 +6,7 @@ import (
 
 	"github.com/saltperfect/goimpl/hmap"
 	"github.com/saltperfect/goimpl/list"
+	"github.com/saltperfect/goimpl/tree"
 )
 
 func main() {
@@ -32,5 +33,15 @@ func main() {
 	testmap.Put(119999, "sbcn")
 	testmap.Print()
 	b , err := testmap.Exists(9999)
-	fmt.Printf("9999 value exists %t", b )
+	fmt.Printf("9999 value exists %t \n", b )
+
+	testtree := tree.NewTree()
+
+	testtree.Put(1)
+	testtree.Put(2)
+	testtree.Put(6)
+	testtree.Put(-1)
+	testtree.Put(8)
+	testtree.Put(9)
+	testtree.Print()
 }
