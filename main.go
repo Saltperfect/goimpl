@@ -6,6 +6,7 @@ import (
 
 	"github.com/saltperfect/goimpl/hmap"
 	"github.com/saltperfect/goimpl/list"
+	"github.com/saltperfect/goimpl/subset"
 	"github.com/saltperfect/goimpl/tree"
 )
 
@@ -32,8 +33,8 @@ func main() {
 	testmap.Put(9999, "sbcn")
 	testmap.Put(119999, "sbcn")
 	testmap.Print()
-	b , err := testmap.Exists(9999)
-	fmt.Printf("9999 value exists %t \n", b )
+	b , _ := testmap.Exists(9999)
+	fmt.Printf("\n 9999 value exists %t \n", b )
 
 	testtree := tree.NewTree()
 
@@ -43,5 +44,17 @@ func main() {
 	testtree.Put(-1)
 	testtree.Put(8)
 	testtree.Put(9)
+	testtree.Put(10)
 	testtree.Print()
+	testtree.Printdfs()
+	b, _ = testtree.Search(6)
+	fmt.Printf("\n 9 value exists %t \n", b)
+
+	h := testtree.Height()
+	fmt.Printf("\n height of the tree is %d \n", h)
+
+
+	subset.Print([]int32{8, 3 })
+
+
 }
