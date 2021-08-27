@@ -144,3 +144,40 @@ func (t *Tree) Height() int {
 	return heightdfs(t.Head)
 }
 
+func (t *Tree) Getmin() int {
+
+	var min int
+	var dfsmin func(t *treenode) 
+	
+	dfsmin = func (t *treenode) {
+		if t.left == nil {
+			min = t.val
+			return
+		}
+		dfsmin(t.left)
+	}
+	dfsmin(t.Head)
+
+	return min
+}
+
+func (t *Tree) IsBST() bool {
+	res := []int{-9999999}
+	b := true
+	var check func(t *treenode) 
+	
+	check = func(t *treenode) {
+		if t == nil {
+			return
+		}
+		check(t.left)
+		if res[len(res)-1] > t.val {
+			b = false
+			return
+		}
+		res = append(res, t.val)
+		check(t.right)
+	}
+	check(t.Head)
+	return b
+}

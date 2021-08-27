@@ -45,6 +45,7 @@ func main() {
 	testtree.Put(8)
 	testtree.Put(9)
 	testtree.Put(10)
+	testtree.Put(-2)
 	testtree.Print()
 	testtree.Printdfs()
 	b, _ = testtree.Search(6)
@@ -53,8 +54,12 @@ func main() {
 	h := testtree.Height()
 	fmt.Printf("\n height of the tree is %d \n", h)
 
+	min := testtree.Getmin()
+	fmt.Printf("\n min value of tree %d \n", min)
+
+	isbst := testtree.IsBST()
+	fmt.Printf("\n is bst %t \n", isbst)
 
 	subset.Print([]int32{8, 3 })
-
 
 }
